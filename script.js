@@ -11,12 +11,13 @@ function UI() {
     
 }
 
+//Adding Details to List
 UI.prototype.addDetailsToList = function (details) {
     const list = document.getElementById("details-list")
     
-    //create tr element
+    //create the element
     const row = document.createElement("tr");
-//insert cols
+    //insert cols
     row.innerHTML=`<td>${details.name}</td>
                     <td>${details.track}</td>
                     <td>${details.mobile}</td>
@@ -42,7 +43,7 @@ function submitDetails(e) {
     const ui = new UI();
     
     //validate if empty
-    if (name === " " || track === " " || mobile === "") {
+    if (name === "" || track === "" || mobile === "") {
         //error alert
         ui.showAlert("Please fill in all fields", "error")
     } else {
@@ -51,16 +52,16 @@ function submitDetails(e) {
         //add details to list
         ui.addDetailsToList(details);
 
-        //show sucess
-        ui.showAlert("Book Added", "Success");
+        //show success
+        ui.showAlert("Details Added", "success");
 
         //clearFields
         ui.clearFields();
 
-        e.preventDefault();
+        
     }
 
-    
+    e.preventDefault();
 }
 
 //show Alerts I need to create a div, then text node to hold the message i'll be appending
@@ -82,11 +83,13 @@ UI.prototype.showAlert = function(message, className) {
     //timeout after 3 sec
     setTimeout(function(){
         document.querySelector(".alert").remove();
-    }, 3000)
+    }, 3000);
 
 }
+
+
 //Delete Details
-UI.prototype.deleteDetails(target) {
+UI.prototype.deleteDetails  = function(target) {
     if(target.className === "delete"){
         target.parentElement.parentElement.remove();
     }
@@ -114,7 +117,8 @@ clear = (e) => {
     ui.deleteDetails(e.target);
 
     //show message after delete
-    ui.showAlert("Details Removed")
+    ui.showAlert("Details Removed", "error");
+
     e.preventDefault();
 }
 //Event Listner For Delete
